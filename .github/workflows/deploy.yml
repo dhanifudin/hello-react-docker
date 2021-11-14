@@ -124,6 +124,9 @@ jobs:
             sudo yum install -y yum-utils
             sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
             sudo yum install -y docker-ce docker-ce-cli containerd.io
+            sudo systemctl restart docker
+            sudo firewall-cmd --zone=docker --add-service=http --permanent
+            sudo firewall-cmd --reload
             sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
-            sudo docker-compose up -d
+            sudo /usr/local/bin/docker-compose up -d
