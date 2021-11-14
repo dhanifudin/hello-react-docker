@@ -31,10 +31,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: 'Build and push'
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hello-react:latest
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hello-react .
+          docker push ${{ secrets.DOCKERHUB_USERNAME}}/hello-react
 
       - name: 'Write config'
         run: |
